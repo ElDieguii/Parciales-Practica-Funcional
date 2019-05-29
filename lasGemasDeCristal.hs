@@ -19,7 +19,7 @@ gemaVidente = UnaGema{
 gemaRelajada::Float->Gema
 gemaRelajada nivelDeRelajacion = UnaGema{
     nombre="Gema Relajada",
-    fuerza=3,
+    fuerza=2,
     personalidad = (relajada nivelDeRelajacion)
 }
 vidente::Situacion->Situacion
@@ -88,8 +88,8 @@ esMejorGema :: Gema->Gema->Situacion->Bool
 esMejorGema unaGema otraGema unaSituacion =
     fuerza unaGema > fuerza otraGema &&  mejorSituacion (personalidad unaGema unaSituacion) (personalidad otraGema unaSituacion)
 
-fusion:: Gema->Gema->Situacion->Gema
-fusion unaGema otraGema unaSituacion = 
+fusion:: Situacion->Gema->Gema->Gema
+fusion unaSituacion unaGema otraGema  = 
     UnaGema{
         nombre=nombreFusionado unaGema otraGema,
         fuerza=fuerzaFusionada unaSituacion unaGema otraGema,
@@ -121,3 +121,18 @@ personalidadFusionada unaGema otraGema unaSituacion =
 situacionMenosDiez :: Situacion->Situacion
 situacionMenosDiez unaSituacion = 
     map (alterarGrado (-10)) unaSituacion
+
+--5)
+fusionGrupal :: [Gema]->Situacion->Gema
+fusionGrupal listaDeGemas unaSituacion =
+    foldl1(fusion unaSituacion) listaDeGemas
+
+--6.a)
+foo:: (Eq a)=>b->(b->a)->(c->[a])->c ->Bool
+foo x y z = any (== y x).z
+
+--Invocaciones de la funcion--
+--foo 5 (+7) [1..] -- Z es una funcion no una lista
+--foo 3 even (map (< 7)) -- Falta un cuarto parametro para poder usar ese map 
+--foo 3 even [1, 2, 3] -- Z es una funcion no una lista
+--foo [1..] head (take 5) [1.. ] -- Unica invocacion valida.
