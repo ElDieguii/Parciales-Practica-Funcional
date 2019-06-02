@@ -114,8 +114,8 @@ mailsDePersonasInteresadas:: Propiedad->[Usuario]->[String]
 mailsDePersonasInteresadas unaPropiedad =
     map (mostrarMail).filter (aux unaPropiedad) 
 
-aux::Propiedad->Usuario->Bool
-aux unaPropiedad unaPersona =
+esDeSuInteres::Propiedad->Usuario->Bool
+esDeSuInteres unaPropiedad unaPersona =
     cumpleBusqueda (busqueda unaPersona) unaPropiedad
 
 mostrarMail :: Usuario->String
