@@ -30,3 +30,5 @@ atributoCapacidades (Robot _ (f,v,r) _)= (f,v,r)
 
 transformar::Autobot->Autobot
 transformar (Robot nombre (f,v,r) funcion) = (Vehiculo nombre (funcion (f,v,r)))
+
+
