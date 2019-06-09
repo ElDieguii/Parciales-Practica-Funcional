@@ -70,3 +70,7 @@ venceEnVelocidad:: Autobot->Autobot->Autobot->Bool
 venceEnVelocidad unRobot unVehiculo otroAutobot = 
     --(elPrimeroEsMasRapido unRobot otroAutobot) && (elPrimeroEsMasRapido unVehiculo otroAutobot) -- OPCION 1
     all(flip elPrimeroEsMasRapido otroAutobot) [unRobot, unVehiculo]  --OPCION 2
+
+dominaATodos::Autobot->[Autobot]->Bool
+dominaATodos unAutobot listaDeAutobots =
+    all (domina unAutobot) listaDeAutobots
