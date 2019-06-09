@@ -60,3 +60,7 @@ elMasRapido unAutobot otroAutobot
 elPrimeroEsMasRapido::Autobot->Autobot->Bool
 elPrimeroEsMasRapido unAutobot otroAutobot =
     (<velocidadContra unAutobot otroAutobot).velocidadContra otroAutobot $unAutobot
+
+
+
+
