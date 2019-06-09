@@ -61,6 +61,12 @@ elPrimeroEsMasRapido::Autobot->Autobot->Bool
 elPrimeroEsMasRapido unAutobot otroAutobot =
     (<velocidadContra unAutobot otroAutobot).velocidadContra otroAutobot $unAutobot
 
+domina:: Autobot->Autobot->Bool
+domina unAutobot otroAutobot =
+    all (venceEnVelocidad unAutobot.transformar $unAutobot) [otroAutobot, (transformar otroAutobot)]
 
 
-
+venceEnVelocidad:: Autobot->Autobot->Autobot->Bool
+venceEnVelocidad unRobot unVehiculo otroAutobot = 
+    --(elPrimeroEsMasRapido unRobot otroAutobot) && (elPrimeroEsMasRapido unVehiculo otroAutobot) -- OPCION 1
+    all(flip elPrimeroEsMasRapido otroAutobot) [unRobot, unVehiculo]  --OPCION 2
