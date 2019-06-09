@@ -74,3 +74,15 @@ venceEnVelocidad unRobot unVehiculo otroAutobot =
 dominaATodos::Autobot->[Autobot]->Bool
 dominaATodos unAutobot listaDeAutobots =
     all (domina unAutobot) listaDeAutobots
+
+quienesCumplen:: (Autobot->Bool)->[Autobot]->[Autobot]
+quienesCumplen condicion listaDeAutobots =
+    filter(condicion) listaDeAutobots
+
+--Funcion para probar "quienesCumple"
+velocidadMenorQue::Autobot->Bool
+velocidadMenorQue unAutobot =
+    (3<).atributoVelocidad.atributoCapacidades $unAutobot
+
+
+
