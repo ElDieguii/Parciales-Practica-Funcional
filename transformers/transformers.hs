@@ -28,7 +28,35 @@ atributoCapacidades::Autobot->(Int,Int,Int)
 atributoCapacidades (Vehiculo _ (v,r)) = (0,v,r)
 atributoCapacidades (Robot _ (f,v,r) _)= (f,v,r)
 
+atributoFuerza::(Int,Int,Int)->Int
+atributoFuerza (f,v,r)=f
+
+atributoVelocidad::(Int,Int,Int)->Int
+atributoVelocidad (f,v,r)=v
+
+atributoResistencia::(Int,Int,Int)->Int
+atributoResistencia (f,v,r)=r
+
 transformar::Autobot->Autobot
 transformar (Robot nombre (f,v,r) funcion) = (Vehiculo nombre (funcion (f,v,r)))
 
+velocidadContra:: Autobot->Autobot->Int
+velocidadContra unAutobot otroAutobot =
+    velocidadAlterada unAutobot.max 0.restaDeAtributos unAutobot $otroAutobot
 
+restaDeAtributos::Autobot->Autobot->Int
+restaDeAtributos unAutobot otroAutobot=
+    (atributoFuerza.atributoCapacidades $otroAutobot) -(atributoResistencia.atributoCapacidades $unAutobot)
+
+velocidadAlterada::Autobot->Int->Int
+velocidadAlterada unAutobot cambioDeVelocidad =
+    (atributoVelocidad.atributoCapacidades $unAutobot) -(cambioDeVelocidad)
+
+elMasRapido::Autobot->Autobot->Autobot
+elMasRapido unAutobot otroAutobot
+    |elPrimeroEsMasRapido unAutobot otroAutobot= unAutobot
+    |otherwise = otroAutobot
+
+elPrimeroEsMasRapido::Autobot->Autobot->Bool
+elPrimeroEsMasRapido unAutobot otroAutobot =
+    (<velocidadContra unAutobot otroAutobot).velocidadContra otroAutobot $unAutobot
